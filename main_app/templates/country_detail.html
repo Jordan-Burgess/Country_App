@@ -1,0 +1,63 @@
+{% extends 'base.html' %} 
+{% block title %}{{country.name}}{% endblock %}
+{% block content %}
+<div class="detail__img">
+    <img src="{{country.image}}" alt="{{country.name}}" />
+</div>
+<div class="detail__name">
+    <h1 class="title">{{country.name}}</h1>
+    <span class="population">Population: {{country.population}}</span>
+    <img src="{{country.flag}}" alt="{{country.name}}" />
+</div>
+<div class="detail__container">
+    <div class="buttons">
+        <a href="{% url 'country_update' country.pk %}" class="button is-info">
+            <span class="icon">
+                <i class="fas fa-edit"></i>
+            </span>
+        </a>
+        <a href="{%url 'country_delete' country.pk %}" class="button is-danger">
+            <span class="icon">
+                <i class="fas fa-trash-alt"></i>
+            </span>
+        </a>
+    </div>
+    <div class="detail__about">
+        <h4 class="title is-4">About</h4>
+        <h5 class="title is-5">Languages</h5>
+        {% for language in country.languages.all %}
+            <span>{{forloop.counter}}</span>
+            <span><b>{{language.name}}</b></span>
+            <p>With {{language.speakers}} Speakers - This language is from the {{language.family}} family. The language is written using the {{language.script}} script.</p>
+            <a href="{% url 'country_language_assoc' country.pk language.pk %}?assoc=remove" class="button is-danger is-outlined">
+                <span class="icon is-small">
+                    <i class="fas fa-times"></i>
+                </span>
+            </a>
+            <br/>
+        {% endfor %}
+        <div class="dropdown">
+            <div class="dropdown-trigger">
+              <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                <span>Add Language</span>
+                <span class="icon is-small">
+                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                </span>
+              </button>
+            </div>
+            <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                <div class="dropdown-content">
+                    {% for language in languages %}
+                    <a href="{% url 'country_language_assoc' country.pk language.pk %}?assoc=add" class="dropdown-item">
+                    {{language.name}}
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+        <p>{{country.info}}</p>
+    </div>
+</div>
+
+{% endblock %}

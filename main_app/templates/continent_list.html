@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Continents{% endblock %}
+
+{% block content %}
+
+<h1 class="title pt-5">{{header}}</h1>
+
+<a class="button is-dark" href="">Add a Continent</a>
+
+<div class="gallery">
+  {% for continent in continents %}
+  <a href="{% url 'continent_detail' continent.pk %}">
+    <div class="card">
+      <div class="card-image">
+        <figure class="image is-square">
+          <img src="{{continent.image}}" alt="{{continent.name}}" />
+        </figure>
+      </div>
+      <div class="card-header">
+        <p class="card-header-title">{{continent.name}}</p>
+      </div>
+    </div>
+  </a>
+	{% empty %}
+  <article class="message">
+    <div class="message-header">
+      <p>No Continents Available</p>
+    </div>
+  </article>
+  {% endfor %}
+</div>
+{% endblock %}

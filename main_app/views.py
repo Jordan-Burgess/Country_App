@@ -78,6 +78,6 @@ class CountryLanguageAssoc(View):
         assoc = request.GET.get("assoc")
         if assoc == 'remove':
             Country.objects.get(pk=pk).languages.remove(language_pk)
-        if assoc == 'ass':
+        if assoc == 'add':
             Country.objects.get(pk=pk).languages.add(language_pk)
         return redirect('countries')

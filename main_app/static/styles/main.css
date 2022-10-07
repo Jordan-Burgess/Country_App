@@ -10,6 +10,11 @@ h3 {
     color: #ffffff;
 }
 
+.home-title {
+    font-size: 100px;
+    text-align: center;
+}
+
 .title {
     color: #ffffff;
     display: inline;

@@ -12,4 +12,5 @@ urlpatterns = [
     path('continents/', views.Continents.as_view(), name="continents"),
     path('continents/<int:pk>/', views.ContinentDetail.as_view(), name="continent_detail"),
     path('countries/<int:pk>/languages/<int:language_pk>/', views.CountryLanguageAssoc.as_view(), name="country_language_assoc"),
+    path('accounts/signup/', views.Signup.as_view(), name="signup")
 ]
